@@ -24,14 +24,14 @@
   <h1 font-family: Sofia, sans-serif>To Do List</h1>
 
   <!-- Checkboxes -->
-  <input onclick="sortTasks()" type="checkbox" class="toggle-switch" id="cb-sort" name="cb-sort"/><label for="cb-sort">Sort by date</label>
-  <input type="checkbox" class="toggle-switch" id="ft-sort" name="ft-sort"/><label for="ft-sort">Filter completed tasks</label>
+  <input onclick="readTasks()" type="checkbox" class="toggle-switch" id="cb-sort" name="cb-sort"/><label for="cb-sort">Sort by date</label>
+  <input onclick="readTasks()" type="checkbox" class="toggle-switch" id="ft-sort" name="ft-sort"/><label for="ft-sort">Filter completed tasks</label>
 
   <!-- List of tasks -->
   <ul class="tasklist" id="taskList"></ul>
 
   <!-- Input Form -->
-  <form class="form-create-task" onsubmit="createTask(event)" onclick="(readStorage)">
+  <form class="form-create-task" onsubmit="createTask(event)" onsubmit="preventSomeKeys(event)" onclick="(readStorage)">
     <input type="text" id="taskName" name="taskName" required><br>
     <input type="date" id="date" name="date" required><br>
     <input class="create-button" type="submit" value="Create Task" required><br>

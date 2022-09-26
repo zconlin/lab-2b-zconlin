@@ -26,6 +26,14 @@ class Task {
     }
 }
 
+function preventSomeKeys(event){
+    input.addEventListener('keydown', e => {
+        if(e.shiftKey)
+          if(e.which == 188,190){
+          }
+      })
+    }
+
 let tasks = []
 let newArray = []
 readTasks()
@@ -48,14 +56,13 @@ function createTask(event) {
     let formData = new FormData(event.currentTarget)
     let json = Object.fromEntries(formData)
     let newTask = new Task({text: json.taskName, date: json.date, done: false, id: Date.now()})
+    
+    // let content = document.createdElement("strong")
+    // content.textContent = event
+    // document.getElementById("usercontent").appendChild(content)
+
     tasks.push(newTask)
     console.log("Added new task")
-
-    // for (i = 0; i < database.length; i++) {
-    //     databaseSort[i] = database[i];
-    //     console.log(database[i])
-    //     console.log(databaseSort[i])
-    //   }
 
     updateStorage(tasks)
     readTasks()
@@ -67,12 +74,17 @@ function readTasks() {
     let newString = ""
     let tempString
 
-    // if (button is checked)
+    // if (sort button is checked)
     if (document.getElementById("cb-sort").checked) {
-        newArray.sort();
+        newArray.sort(function(a, b){return new Date(a.date) - new Date(b.date)});
         console.log("Sorted!")
     }
-    // then call the sortTasks()
+    
+    // if (filter button is checked)
+    if (document.getElementById("ft-sort").checked) {
+        newArray.filter(function(a, b){return new Date(a.date) - new Date(b.date)});
+        console.log("Filtered!")
+    }
 
     for (const x in newArray){
         tempString = newArray.at(x).toHTML()
@@ -82,7 +94,6 @@ function readTasks() {
 }
 
 function updateTask(id) {
-    // console.log(id)
     for (const x in tasks) {
         if(tasks[x].id == id) {
             tasks.at(x).toggle()
@@ -103,31 +114,6 @@ function deleteTask(id) {
     readTasks()
 }
 
-function sortTasks() {
-    console.log("Flip!")
-}
-
 function prevent(event){
     event.preventDefault();
 }
-
-// const sortButton = document.getElementById("cb-sort");
-// sortButton.addEventListener("click", sortTasks()) {
-//   document.getElementById("cb-sort").innerHTML = "Hello World"
-//   console.log("cb-sort")
-// });
-
-// function byDate() {
-//     for (i = 0; i < tasks.size(); i++) {
-//         x = tasks(date).at[i]
-//         y = tasks(date).at[i+1]
-
-//         tasks.sort(function(x, y) {
-//             return x.timestamp - y.timestamp
-//         }
-//     }
-// }
-
-// const dates = ['Mar 16 2017', 'Jan 22 2021', 'Dec 31 2000'];
-// dates.sort();
-// console.log(dates); 
