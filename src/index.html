@@ -31,10 +31,11 @@
   <ul class="tasklist" id="taskList"></ul>
 
   <!-- Input Form -->
-  <form class="form-create-task" onsubmit="createTask(event)" onsubmit="preventSomeKeys(event)" onclick="(readStorage)">
+  <form class="form-create-task" onsubmit="createTask(event)" onclick="(readStorage)">
     <input type="text" id="taskName" name="taskName" required><br>
     <input type="date" id="date" name="date" required><br>
     <input class="create-button" type="submit" value="Create Task" required><br>
+    <!-- <input class="create-button" type="submit" value="Create Task" onclick="localStorage.removeItem('area');area.value=''" required><br> -->
   </form>
 
   <!-- Links to scripts -->
