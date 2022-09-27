@@ -67,16 +67,22 @@ function readTasks() {
     let newString = ""
     let tempString
     document.getElementById("taskName").value = localStorage.getItem("save")
+    // document.getElementById("cb-sort").value = localStorage.getItem("sorted")
     document.getElementById('date').valueAsDate = new Date();
 
-    if (document.getElementById("cb-sort").checked) {
+    if (document.getElementById("cb-sort").value) {
+        localStorage.setItem("sorted", document.getElementById("cb-sort").value)
         newArray.sort(function(a, b){return new Date(a.date) - new Date(b.date)})
-        console.log("Sorted!")
+        // console.log(sorted)
+        // console.log("Sorted!")
+
     }
     
     if (document.getElementById("ft-sort").checked) {
+        localStorage.setItem("filtered", document.getElementById("ft-sort").value)
         newArray = newArray.filter(task => task.done == false)
-        console.log("Filtered!")
+        // console.log(sorted)
+        // console.log("Filtered!")
     }
 
     for (const x in newArray){
@@ -108,7 +114,6 @@ function deleteTask(id) {
 
 function saveText () {
     localStorage.setItem('save', document.getElementById("taskName").value)
-
 }
 
 function prevent(event){
