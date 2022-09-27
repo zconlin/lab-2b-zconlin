@@ -66,16 +66,16 @@ function readTasks() {
     newArray = readStorage()
     let newString = ""
     let tempString
+
     document.getElementById("taskName").value = localStorage.getItem("save")
     // document.getElementById("cb-sort").value = localStorage.getItem("sorted")
     document.getElementById('date').valueAsDate = new Date();
 
-    if (document.getElementById("cb-sort").value) {
-        localStorage.setItem("sorted", document.getElementById("cb-sort").value)
+    if (document.getElementById("cb-sort").checked) {
+        // localStorage.setItem = localStorage.setItem(sorted, document.getElementById("cb-sort").value)
         newArray.sort(function(a, b){return new Date(a.date) - new Date(b.date)})
         // console.log(sorted)
-        // console.log("Sorted!")
-
+        console.log("Sorted!")
     }
     
     if (document.getElementById("ft-sort").checked) {
