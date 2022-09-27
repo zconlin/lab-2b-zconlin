@@ -45,10 +45,17 @@ function createTask(event) {
     event.preventDefault()
     let formData = new FormData(event.currentTarget)
     let json = Object.fromEntries(formData)
+
+    json.taskName = json.taskName.replaceAll('<', '&lt;')
+    json.taskName = json.taskName.replaceAll('>', '&gt;')
+    json.taskName = json.taskName.replaceAll('&', '&amp;')
+
     let newTask = new Task({text: json.taskName, date: json.date, done: false, id: Date.now()})
 
     tasks.push(newTask)
     console.log("Added new task")
+
+    localStorage.removeItem("save")
 
     updateStorage(tasks)
     readTasks()
@@ -59,14 +66,14 @@ function readTasks() {
     newArray = readStorage()
     let newString = ""
     let tempString
+    document.getElementById("taskName").value = localStorage.getItem("save")
+    document.getElementById('date').valueAsDate = new Date();
 
-    // if (sort button is checked)
     if (document.getElementById("cb-sort").checked) {
         newArray.sort(function(a, b){return new Date(a.date) - new Date(b.date)})
         console.log("Sorted!")
     }
     
-    // if (filter button is checked)
     if (document.getElementById("ft-sort").checked) {
         newArray = newArray.filter(task => task.done == false)
         console.log("Filtered!")
@@ -90,7 +97,6 @@ function updateTask(id) {
 }
 
 function deleteTask(id) {
-    // console.log(id)
     for (const x in tasks) {
         if (tasks[x].id == id) {
             tasks.splice(x,1)
@@ -100,10 +106,10 @@ function deleteTask(id) {
     readTasks()
 }
 
-// area.value = localStorage.getItem('area')
-// area.oninput = () => {
-//     localStorage.setItem('area', area.value)                     // No idea where to start
-// };
+function saveText () {
+    localStorage.setItem('save', document.getElementById("taskName").value)
+
+}
 
 function prevent(event){
     event.preventDefault();

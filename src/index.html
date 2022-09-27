@@ -32,7 +32,7 @@
 
   <!-- Input Form -->
   <form class="form-create-task" onsubmit="createTask(event)" onclick="(readStorage)">
-    <input type="text" id="taskName" name="taskName" required><br>
+    <input type="text" id="taskName" name="taskName" required oninput="saveText()"><br>
     <input type="date" id="date" name="date" required><br>
     <input class="create-button" type="submit" value="Create Task" required><br>
     <!-- <input class="create-button" type="submit" value="Create Task" onclick="localStorage.removeItem('area');area.value=''" required><br> -->
