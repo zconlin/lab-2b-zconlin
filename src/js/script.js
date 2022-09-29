@@ -68,18 +68,19 @@ function readTasks() {
     let tempString
 
     document.getElementById("taskName").value = localStorage.getItem("save")
-    // document.getElementById("cb-sort").value = localStorage.getItem("sorted")
     document.getElementById('date').valueAsDate = new Date();
 
     if (document.getElementById("cb-sort").checked) {
-        // localStorage.setItem = localStorage.setItem(sorted, document.getElementById("cb-sort").value)
+        // localStorage.setItem("sorted", document.getElementById("cb-sort").checked)
         newArray.sort(function(a, b){return new Date(a.date) - new Date(b.date)})
-        // console.log(sorted)
-        console.log("Sorted!")
+    }
+
+    if (!document.getElementById("cb-sort").checked) {
+        localStorage.setItem("sorted", document.getElementById("cb-sort").checked)
     }
     
     if (document.getElementById("ft-sort").checked) {
-        localStorage.setItem("filtered", document.getElementById("ft-sort").value)
+        // localStorage.setItem("filtered", document.getElementById("ft-sort").value)
         newArray = newArray.filter(task => task.done == false)
         // console.log(sorted)
         // console.log("Filtered!")
@@ -98,6 +99,9 @@ function updateTask(id) {
             tasks.at(x).toggle()
         }
     }
+    document.getElementById("cb-sort").checked = localStorage.getItem("sorted")
+
+    
     updateStorage(tasks)
     readTasks()
 }
@@ -115,6 +119,12 @@ function deleteTask(id) {
 function saveText () {
     localStorage.setItem('save', document.getElementById("taskName").value)
 }
+
+window.addEventListener("load", Event => {
+    document.getElementById("cb-sort").checked = (localStorage.getItem("sorted") === 'true') 
+    console.log(localStorage.getItem("sorted"))
+    console.log("!")
+})
 
 function prevent(event){
     event.preventDefault();
